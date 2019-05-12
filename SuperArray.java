@@ -1,113 +1,200 @@
-import java.util.array;
-class SuperArray{
-  int[] intarray = new int[10];
-  String[] stringarray = new String[10];
+public class SuperArray{
+  public int size;
+  public String[] data;
+
+  SuperArray(){
+    data = new String[10];
+  }
+
 
   public void clear(){
-    var list = [1,2,3,4,5,6,7,8,9,10];
-    list.length = null;
+    data = new String[0];
   }
-  public int intSize(){
-    int[] intarray = i;
 
+
+  public int Size(){
+    int counter = 0;
+    for(int i = 0; i < data.length; i++){
+      if(data[i] != null){
+        counter++;
+      }
+    }
+    return counter;
   }
+
+
   public boolean isEmpty(){
-    if (var list = [0]);
+    int counter = 0;
+    for(int i = 0; i < data.length; i++){
+      if(data[i] != null){
+        counter++;
+      }
+    }
+    if(counter == 0){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
+  public void resize(){
+    String[] data2 = new String[data.length + 1];
+    for(int i = 0; i < data.length; i++){
+      data2[i] = data[i];
+    }
+    String[] data = new String[data2.length];
+    for(int j = 0; j < data2.length; j++){
+      data[j] = data2[j];
+    }
+  }
+
+
+  public boolean add(String element){
+    if(data[data.length - 1] == null){
+      for(int i = data.length - 1; i >= 0; i--){
+        if(data[i] != null){
+          data[i+1] = element;
+          return true;
+          //break;
+        }
+      }
+    }
+    this.resize();
+    data[data.length - 1] = element;
     return true;
-    if (var list > [0]);
+  }
+
+
+  public String get(int index){
+    String ge = "";
+    try{
+      ge = data[index];
+      }
+    catch (ArrayIndexOutOfBoundsException e){
+        System.out.println("error: " + e.getMessage());
+      }
+    return ge;
+  }
+
+
+  public String Set(int index, String element){
+    String se = "";
+    try{
+      se = data[index];
+      data[index] = element;
+    }
+    catch (ArrayIndexOutOfBoundsException e){
+      System.out.println(e.getMessage());
+    }
+    return se;
+  }
+
+
+  public String toString(){
+    String format = "[";
+    for(int i=0; i<data.length;i++){
+      format = format + data[i];
+      if(i < data.length - 1){
+          format = format + ",";
+      }
+  }
+  return format;
+  }
+
+
+  public boolean contains(String element){
+    for(int i = 0; i < data.length; i++){
+      if(data[i] == element){
+        return true;
+        //break;
+      }
+    }
     return false;
   }
-  public boolean add(String element){
-    var list = [i];
-    String[i] = new String[i+1];
-    list.add("new value");
-  }
-  public String stringGet(int index){
-    int index = [x];
-      System.out.println(String [x]);
-        try{String[] array = new String[1];
-          array[3]= 2;
-        }
-        catch (ArithmeticException e){
-          System.out.println("Index out of range");
-  }
-  public String stringSet(int index, String element){
 
-  }
-  public String toString(){
-    System.out.print("[")
-    for(i=0; i<Stringarray.length;i++){
-    System.out.print(Stringarray[i]+",");
-    System.out.print("]")
-  }
-  }
-  public boolean booleanContains(String element){
-    Scanner s = new Scanner(System.in);
-    System.out.println("Element Search");
-    element = register.nextLine();
-    for(i=0; i<Stringarray.length; i++){
-      if i = element{
-        return true;
-      }
+
+  /*public void add(int index, String element){
+    String data2[] = new String [data.length+1];
+    for(int i = 0; i < data.length; i++){
+      data2[i] = data[i];
     }
-  }
+    data2[index] = element;
+    for(int z = index; z < data.length; z++){
+      data2[z + 1] = data[z];
+    }
+    String data[] = new String [data2.length];
+    for(int x = 0; x < data2.length; x++){
+      data[x] = data2[x];
+    }
+  }*/
+
+
   public void add(int index, String element){
-    Stringarray[i] = new Stringarray[i+1];
-    for(i=0; i<Stringarray.length; i++){
-      if(i === null){
+    try{for(int i = data.length - 1; i > index; i--){
+      data[i] = data[i-1];
       }
+    data[index] = element;
+    }
+    catch(ArrayIndexOutOfBoundsException e){
+      System.out.println(e.getMessage());
     }
   }
-  public int indexOfString(String element){
-    Scanner s = new Scanner(System.in);
-    System.out.println("Element Search");
-    element = register.nextLine();
-    for(i=0; i<Stringarray.length; i++){
-      if i = element{
+
+
+
+  public int indexOf(String element){
+    for(int i = 0; i < data.length; i++){
+      if(data[i] == element){
         return i;
+        //break;
       }
-    else return -1;
+    }
+    return -1;
   }
-  }
-  public int lastIndexOfString(String element){
-    Scanner s = new Scanner(System.in);
-    System.out.println("Element Search");
-    element = register.nextLine();
-    for(i=0; i<Stringarray.length; i++){
-      if Math.abs i> Math.abs i = element{
+
+
+  public int lastIndexOf(String element){
+    for(int i = data.length - 1; i >= 0; i--){
+      if(data[i] == element){
         return i;
+        //break;
       }
-    else return -1;
+    }
+    return -1;
   }
+
+
   public String remove(int index){
-    if(index >= size){
-            throw new ArrayIndexOutOfBoundsException("index array out of bounds");
+    //return data[index];
+    String remo ="";
+    try{
+    //return data[index];
+    remo = data[index];
+    for(int i = index; i < data.length; i++){
+      data[i] = data[i+1];
     }
-    String removed = data[index];
-    String[] data2 = new String[size - 1];
-    for(int i = 0; i < index; i ++){
-                data2[i] = data[i];
     }
-    for(int i = index + 1; i < size; i ++){
-                data2[i-1] = data[i]
+    catch(ArrayIndexOutOfBoundsException e){
+      System.out.println("this is the error for remove 1: " + e.getMessage());
     }
-    return removed;
+    return remo;
   }
+
 
   public boolean remove(String element){
-    String[] data2 = new String[size -1];
-    for(int i = 0; i< size; i ++);
-        if(element == data[i]){
-                  int index = 1;
-                  for(int j = 0; j < index; j++){
-                      data2[j] = data[j];
-                  }
-                  for(int j = index + !; j < size; j++){
-                      data2[j=1] = data[j];
-                  }
-                  return true;
-        }
+    for(int i = 0; i < data.length; i++){
+      if(data[i] == element){
+          for(int j = i; j < data.length - 1; j++){
+            data[j] = data[j+1];
+
+          }
+      data[data.length - 1] = null;
+      return true;
+      //break;
+      }
+    }
+    return false;
   }
-  return false;
-}
 }
